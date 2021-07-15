@@ -1,0 +1,137 @@
+:root {
+  --main-color: #2d8cff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+/* ==========Navbar styles start========== */
+.navbar {
+  height: 9vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 0.2px 1px grey;
+}
+.navbar .navbar__logo {
+  width: 25%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar .navbar__logo .logo {
+  width: 210px;
+}
+.navbar .navbar__links {
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.navbar .navbar__links a {
+  text-decoration: none;
+  color: var(--main-color);
+  font-size: 16px;
+  font-variant: small-caps;
+}
+.navbar .navbar__links a:hover {
+  color: blue;
+}
+/* ==========Navbar styles end========== */
+
+/* ==========Main section styles start========== */
+.main__section {
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__section .main__section__center {
+  height: 50vh;
+  width: 32vw;
+}
+.main__section .main__section__center h2 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 500;
+}
+.main__section .main__section__center .center__input {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+}
+.main__section .main__section__center .center__input label {
+  font-size: 12px;
+  color: rgb(136, 136, 136);
+  padding: 5px 5px;
+  font-weight: 500;
+}
+.main__section .main__section__center .center__input input {
+  height: 35px;
+  border: 2px solid rgba(136, 136, 136, 0.514);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  padding: 18px 10px;
+  font-size: 16px;
+}
+.main__section .main__section__center .center__input input:focus {
+  outline: none;
+  border-color: var(--main-color);
+}
+.main__section .main__section__center p {
+  width: 70%;
+  margin: 15px auto;
+  font-size: 14px;
+}
+.main__section .main__section__center p span {
+  color: blue;
+  cursor: pointer;
+}
+.main__section .main__section__center .center__button {
+  display: flex;
+  justify-content: center;
+}
+.main__section .main__section__center button {
+  width: 70%;
+  margin: 0 auto;
+  height: 35px;
+  font-size: 16px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border: none;
+  color: #fff;
+  background-color: var(--main-color);
+  cursor: pointer;
+}
+.main__section .main__section__center button:focus {
+  outline: none;
+}
+.main__section .main__section__center button:disabled {
+  color: rgb(136, 136, 136);
+  background-color: rgb(238, 238, 238);
+  cursor: default;
+}
+/* ==========Main section styles end========== */
+
+/* ==========Footer section styles start========== */
+.footer__section {
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(68, 68, 68);
+}
+.footer__section p {
+  font-size: 14px;
+}
+/* ==========Footer section styles end========== */
