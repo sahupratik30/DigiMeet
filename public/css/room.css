@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+.main .main__left {
+  flex: 0.8;
+  display: flex;
+  flex-direction: column;
+}
+.main.chat__inactive .main__left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.main .main__left .main__left__video {
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.main .main__left .main__left__video #video__grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.main .main__left .main__left__video #video__grid video {
+  width: 300px;
+  height: 250px;
+}
+.main .main__left .main__left__controls {
+  height: 8vh;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: space-between;
+}
+.main .main__left .main__left__controls .controls__div {
+  display: flex;
+}
+.main .main__left .main__left__controls .controls__div .controls__button {
+  text-align: center;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.main .main__left .main__left__controls .controls__div .controls__button:hover {
+  background-color: rgba(97, 97, 97, 0.75);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+}
+.main .main__left .main__left__controls .controls__div .controls__button .fas {
+  cursor: pointer;
+}
+.main
+  .main__left
+  .main__left__controls
+  .controls__div
+  .controls__button
+  .fa-microphone-slash,
+.main
+  .main__left
+  .main__left__controls
+  .controls__div
+  .controls__button
+  .fa-video-slash {
+  color: red;
+}
+.main .main__left .main__left__controls .controls__div .controls__button p {
+  font-size: 12px;
+}
+.main .main__right {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+}
+.main.chat__inactive .main__right {
+  display: none;
+}
+.main__right .main__right__header {
+  height: 8vh;
+  background-color: rgba(185, 185, 185, 0.5);
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: center;
+  color: rgb(48, 48, 48);
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+.main__right .main__right__chat {
+  flex-grow: 1;
+  overflow: auto;
+}
+.main__right .main__right__chat .messages {
+  padding: 0px 10px;
+}
+.main__right .main__right__chat .messages .username {
+  font-size: 16px;
+}
+.main__right .main__right__chat .messages .input__message {
+  font-size: 13px;
+}
+.main__right .main__right__input {
+  height: 8vh;
+  background-color: rgba(185, 185, 185, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main__right .main__right__input input {
+  width: 90%;
+  height: 70%;
+  font-size: 14px;
+  background-color: transparent;
+  border: none;
+}
+.main__right .main__right__input input:focus {
+  outline: none;
+}
