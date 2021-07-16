@@ -14,7 +14,8 @@
   display: flex;
   flex-direction: column;
 }
-.main.chat__inactive .main__left {
+.main.chat__inactive .main__left,
+.main.participants__inactive .main__left {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -88,15 +89,18 @@
 .main .main__left .main__left__controls .controls__div .controls__button p {
   font-size: 12px;
 }
-.main .main__right {
+.main .main__right,
+.main .main__right1 {
   flex: 0.2;
   display: flex;
   flex-direction: column;
 }
-.main.chat__inactive .main__right {
+.main.chat__inactive .main__right,
+.main.participants__inactive .main__right1 {
   display: none;
 }
-.main__right .main__right__header {
+.main__right .main__right__header,
+.main__right1 .main__right__header {
   height: 8vh;
   background-color: rgba(185, 185, 185, 0.5);
   letter-spacing: 2px;
@@ -106,8 +110,9 @@
   align-items: center;
   font-size: 20px;
   font-weight: bold;
+  position: relative;
 }
-.main__right .main__right__header .fas {
+.main__right .main__right__header #blink {
   font-size: 10px;
   margin-right: 5px;
   animation: animate 1s linear infinite;
@@ -129,11 +134,13 @@
     color: red;
   }
 }
-.main__right .main__right__chat {
+.main__right .main__right__chat,
+.main__right1 .main__right__participants {
   flex-grow: 1;
   overflow: auto;
 }
-.main__right .main__right__chat .messages {
+.main__right .main__right__chat .messages,
+.main__right1 .main__right__participants .participants {
   padding: 0px 10px;
   list-style: none;
   width: 100%;
@@ -150,6 +157,41 @@
   -moz-border-radius: 8px;
   -ms-border-radius: 8px;
   -o-border-radius: 8px;
+}
+.main__right1 .main__right__participants .participants .participant {
+  padding: 5px 10px;
+  background-color: rgba(173, 173, 173, 0.1);
+  width: 80%;
+  margin: 10px 0;
+  font-weight: bold;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+.main__right1 .main__right__participants .participants .participant .fas {
+  margin-right: 8px;
+  color: rgb(0, 185, 0);
+}
+.main__right1 .main__right__header .fas {
+  margin-right: 5px;
+  font-size: 20px;
+  color: rgb(0, 185, 0);
+}
+.main__right .main__right__header .fa-times,
+.main__right1 .main__right__header .fa-times {
+  position: absolute;
+  top: 15px;
+  font-size: 16px;
+  color: rgb(182, 0, 0);
+  cursor: pointer;
+  right: 5px;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }
 .main__right .main__right__chat .messages .message.incoming {
   display: flex;
