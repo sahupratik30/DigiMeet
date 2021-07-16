@@ -21,7 +21,7 @@
 }
 .main .main__left .main__left__video {
   flex-grow: 1;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #000;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +38,7 @@
 .main .main__left .main__left__video #video__grid video {
   width: 300px;
   height: 250px;
+  background-color: transparent !important;
 }
 .main .main__left .main__left__controls {
   height: 8vh;
