@@ -12,20 +12,19 @@ const videoState = document.getElementById("video__state");
 const videoGrid = document.getElementById("video__grid");
 const socket = io("/");
 //PeerJS
-var peer = new Peer(undefined, {
-  host: "/",
-  port: "3001",
-});
+var peer = new Peer();
 //Video Part
+let myVideoStream;
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 const peers = {};
 navigator.mediaDevices
   .getUserMedia({
     video: true,
-    audio: false,
+    audio: true,
   })
   .then((stream) => {
+    myVideoStream = stream;
     addVideoStream(myVideo, stream);
 
     peer.on("call", (call) => {
@@ -39,10 +38,10 @@ navigator.mediaDevices
     socket.on("user-connected", (userid) => {
       connectToNewUser(userid, stream);
     });
-    socket.on("user-disconnected", (userid) => {
-      if (peers[userid]) peers[userid].close();
-    });
   });
+socket.on("user-disconnected", (userid) => {
+  if (peers[userid]) peers[userid].close();
+});
 peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id);
 });
@@ -96,21 +95,31 @@ const sendMessage = (e) => {
 //Function to toggle mute and unmute
 const toggleMuteUnmute = () => {
   if (muteIcon.classList.contains("fa-microphone")) {
-    muteIcon.classList.replace("fa-microphone", "fa-microphone-slash");
-    audioState.innerText = "Unmute";
+    const enabled = myVideoStream.getAudioTracks()[0].enabled;
+    if (enabled) {
+      myVideoStream.getAudioTracks()[0].enabled = false;
+      muteIcon.classList.replace("fa-microphone", "fa-microphone-slash");
+      audioState.innerText = "Unmute";
+    }
   } else {
     muteIcon.classList.replace("fa-microphone-slash", "fa-microphone");
     audioState.innerText = "Mute";
+    myVideoStream.getAudioTracks()[0].enabled = true;
   }
 };
 //Function to toggle video
 const toggleVideo = () => {
-  if (videoIcon.classList.contains("fa-video")) {
-    videoIcon.classList.replace("fa-video", "fa-video-slash");
-    videoState.innerText = "Start Video";
+  const enabled = myVideoStream.getVideoTracks()[0].enabled;
+  if (enabled) {
+    myVideoStream.getVideoTracks()[0].enabled = false;
+    if (videoIcon.classList.contains("fa-video")) {
+      videoIcon.classList.replace("fa-video", "fa-video-slash");
+      videoState.innerText = "Start Video";
+    }
   } else {
     videoIcon.classList.replace("fa-video-slash", "fa-video");
     videoState.innerText = "Stop Video";
+    myVideoStream.getVideoTracks()[0].enabled = true;
   }
 };
 chatBtn.addEventListener("click", toggleChatBox);
