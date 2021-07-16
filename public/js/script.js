@@ -12,6 +12,11 @@ const audioState = document.getElementById("audio__state");
 const videoState = document.getElementById("video__state");
 const videoGrid = document.getElementById("video__grid");
 const socket = io("/");
+let user_name;
+do {
+  let name = prompt("Please Enter your name:");
+  user_name = name;
+} while (!user_name);
 //PeerJS
 var peer = new Peer();
 //Video Part
@@ -75,12 +80,11 @@ const toggleChatBox = () => {
   }
 };
 //Function to append message to DOM
-const appendMessage = (message) => {
+const appendMessage = (msg, type) => {
   const li = document.createElement("li");
-  const markup = `<li class="message">
-  <h4 class="username">user</h4>
-  <p class="input__message">${message}</p>
-</li>`;
+  li.classList.add("message", type);
+  const markup = `<h4 class="username">${msg.user}</h4>
+  <p class="input__message">${msg.message}</p>`;
   li.innerHTML = markup;
   messageList.append(li);
   input.value = "";
@@ -88,11 +92,18 @@ const appendMessage = (message) => {
 //Function to send message
 const sendMessage = (e) => {
   let key = e.key;
-  let message = e.target.value;
+  let msg = {
+    user: user_name,
+    message: e.target.value.trim(),
+  };
   if (key === "Enter") {
-    appendMessage(message);
+    appendMessage(msg, "outgoing");
+    socket.emit("send_message", msg);
   }
 };
+socket.on("receive_message", (msg) => {
+  appendMessage(msg, "incoming");
+});
 //Function to toggle mute and unmute
 const toggleMuteUnmute = () => {
   if (muteIcon.classList.contains("fa-microphone")) {
