@@ -5,6 +5,7 @@ const input = document.getElementById("input__box");
 const messageList = document.querySelector(".messages");
 const muteBtn = document.getElementById("mute__btn");
 const videoBtn = document.getElementById("video__btn");
+const leaveBtn = document.getElementById("leaveBtn");
 const muteIcon = document.getElementById("mute__icon");
 const videoIcon = document.getElementById("video__icon");
 const audioState = document.getElementById("audio__state");
@@ -122,7 +123,12 @@ const toggleVideo = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 };
+//Function to leave meeting
+function leaveMeeting() {
+  window.location.href = "/";
+}
 chatBtn.addEventListener("click", toggleChatBox);
 input.addEventListener("keyup", sendMessage);
 muteBtn.addEventListener("click", toggleMuteUnmute);
 videoBtn.addEventListener("click", toggleVideo);
+leaveBtn.addEventListener("click", leaveMeeting);
