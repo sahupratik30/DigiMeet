@@ -34,7 +34,9 @@ io.on("connection", (socket) => {
   socket.on("join-room", (roomid, userid) => {
     socket.join(roomid);
     socket.to(roomid).emit("user-connected", userid);
-
+    socket.on("send_message", (data) => {
+      socket.to(roomid).emit("receive_message", data);
+    });
     socket.on("disconnect", () => {
       socket.to(roomid).emit("user-disconnected", userid);
     });
