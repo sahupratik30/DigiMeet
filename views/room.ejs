@@ -106,7 +106,7 @@
     <title>DigiMeet-Meetings</title>
   </head>
   <body>
-    <div class="main" id="main">
+    <div class="main chat__inactive participants__inactive" id="main">
       <div class="main__left">
         <div class="main__left__video">
           <div id="video__grid"></div>
@@ -127,7 +127,7 @@
               <i class="fas fa-lg fa-upload"></i>
               <p>Share Screen</p>
             </div>
-            <div class="controls__button">
+            <div class="controls__button" id="showParticipants">
               <i class="fas fa-lg fa-users"></i>
               <p>Show Participants</p>
             </div>
@@ -151,13 +151,27 @@
       </div>
       <div class="main__right">
         <div class="main__right__header">
-          <i class="fas fa-circle"></i>Live Chats
+          <i class="fas fa-circle" id="blink"></i>Live Chats
+          <i class="fas fa-times"></i>
         </div>
         <div class="main__right__chat">
           <ul class="messages"></ul>
         </div>
         <div class="main__right__input">
           <input type="text" id="input__box" placeholder="Type a message..." />
+        </div>
+      </div>
+      <div class="main__right1">
+        <div class="main__right__header">
+          <i class="fas fa-lg fa-users"></i>Participants
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="main__right__participants">
+          <ul class="participants">
+            <li class="participant"><i class="fas fa-user"></i>Pratik</li>
+            <li class="participant"><i class="fas fa-user"></i>Pranjal</li>
+            <li class="participant"><i class="fas fa-user"></i>Prat</li>
+          </ul>
         </div>
       </div>
     </div>
