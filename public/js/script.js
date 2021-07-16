@@ -11,6 +11,13 @@ const videoIcon = document.getElementById("video__icon");
 const audioState = document.getElementById("audio__state");
 const videoState = document.getElementById("video__state");
 const videoGrid = document.getElementById("video__grid");
+const participantCloseBtn = document.querySelector(
+  ".main__right1 .main__right__header .fa-times"
+);
+const chatCloseBtn = document.querySelector(
+  ".main__right .main__right__header .fa-times"
+);
+const showParticipants = document.getElementById("showParticipants");
 const socket = io("/");
 let user_name;
 do {
@@ -73,12 +80,26 @@ function addVideoStream(video, stream) {
 }
 //Function to toggle chatBox
 const toggleChatBox = () => {
+  if (!mainContainer.classList.contains("participants__inactive")) {
+    mainContainer.classList.add("participants__inactive");
+  }
   if (mainContainer.classList.contains("chat__inactive")) {
     mainContainer.classList.remove("chat__inactive");
   } else {
     mainContainer.classList.add("chat__inactive");
   }
 };
+//Function to toggle participants
+function toggleParticipants() {
+  if (!mainContainer.classList.contains("chat__inactive")) {
+    mainContainer.classList.add("chat__inactive");
+  }
+  if (mainContainer.classList.contains("participants__inactive")) {
+    mainContainer.classList.remove("participants__inactive");
+  } else {
+    mainContainer.classList.add("participants__inactive");
+  }
+}
 //Function to append message to DOM
 const appendMessage = (msg, type) => {
   const li = document.createElement("li");
@@ -119,6 +140,14 @@ const toggleMuteUnmute = () => {
     myVideoStream.getAudioTracks()[0].enabled = true;
   }
 };
+//Function to close participants bar
+function closeParticipants() {
+  mainContainer.classList.add("participants__inactive");
+}
+//Function to close chat bar
+function closeChat() {
+  mainContainer.classList.add("chat__inactive");
+}
 //Function to toggle video
 const toggleVideo = () => {
   const enabled = myVideoStream.getVideoTracks()[0].enabled;
@@ -143,3 +172,6 @@ input.addEventListener("keyup", sendMessage);
 muteBtn.addEventListener("click", toggleMuteUnmute);
 videoBtn.addEventListener("click", toggleVideo);
 leaveBtn.addEventListener("click", leaveMeeting);
+showParticipants.addEventListener("click", toggleParticipants);
+participantCloseBtn.addEventListener("click", closeParticipants);
+chatCloseBtn.addEventListener("click", closeChat);
