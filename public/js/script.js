@@ -3,6 +3,7 @@ const chatBtn = document.getElementById("chatBtn");
 const mainContainer = document.getElementById("main");
 const input = document.getElementById("input__box");
 const messageList = document.querySelector(".messages");
+const participantsList = document.querySelector(".participants");
 const muteBtn = document.getElementById("mute__btn");
 const videoBtn = document.getElementById("video__btn");
 const leaveBtn = document.getElementById("leaveBtn");
@@ -22,7 +23,7 @@ const socket = io("/");
 let user_name;
 do {
   let name = prompt("Please Enter your name:");
-  user_name = name;
+  user_name = name.trim();
 } while (!user_name);
 //PeerJS
 var peer = new Peer();
@@ -47,16 +48,41 @@ navigator.mediaDevices
         addVideoStream(video, userVideoStream);
       });
     });
-
-    socket.on("user-connected", (userid) => {
+    socket.on("user-connected", (userid, userNames) => {
       connectToNewUser(userid, stream);
+      participantsList.innerHTML = "";
+      userNames.forEach((username) => {
+        const li = document.createElement("li");
+        li.classList.add("participant");
+        const markup = `<i class="fas fa-user"></i>${username}`;
+        li.innerHTML = markup;
+        participantsList.append(li);
+      });
+    });
+    socket.on("update_users", (userNames) => {
+      participantsList.innerHTML = "";
+      userNames.forEach((username) => {
+        const li = document.createElement("li");
+        li.classList.add("participant");
+        const markup = `<i class="fas fa-user"></i>${username}`;
+        li.innerHTML = markup;
+        participantsList.append(li);
+      });
     });
   });
-socket.on("user-disconnected", (userid) => {
+socket.on("user-disconnected", (userid, userNames) => {
+  participantsList.innerHTML = "";
+  userNames.forEach((username) => {
+    const li = document.createElement("li");
+    li.classList.add("participant");
+    const markup = `<i class="fas fa-user"></i>${username}`;
+    li.innerHTML = markup;
+    participantsList.append(li);
+  });
   if (peers[userid]) peers[userid].close();
 });
 peer.on("open", (id) => {
-  socket.emit("join-room", ROOM_ID, id);
+  socket.emit("join-room", ROOM_ID, id, user_name);
 });
 function connectToNewUser(userid, stream) {
   const call = peer.call(userid, stream);
