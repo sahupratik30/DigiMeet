@@ -29,16 +29,27 @@ app.get("/room/:roomid", (req, res) => {
     res.redirect("/");
   }
 });
-
+const users = {};
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomid, userid) => {
+  socket.on("join-room", (roomid, userid, name) => {
     socket.join(roomid);
-    socket.to(roomid).emit("user-connected", userid);
+    let userNames = [];
+    users[socket.id] = name;
+    for (const name in users) {
+      userNames.push(users[name]);
+    }
+    socket.to(roomid).emit("user-connected", userid, userNames);
+    io.in(socket.id).emit("update_users", userNames);
     socket.on("send_message", (data) => {
       socket.to(roomid).emit("receive_message", data);
     });
     socket.on("disconnect", () => {
-      socket.to(roomid).emit("user-disconnected", userid);
+      delete users[socket.id];
+      let userNames = [];
+      for (const name in users) {
+        userNames.push(users[name]);
+      }
+      socket.to(roomid).emit("user-disconnected", userid, userNames);
     });
   });
 });
