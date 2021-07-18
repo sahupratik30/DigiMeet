@@ -1,3 +1,4 @@
+let meetingId;
 //DOM Elements
 const chatBtn = document.getElementById("chatBtn");
 const mainContainer = document.getElementById("main");
@@ -5,6 +6,9 @@ const input = document.getElementById("input__box");
 const messageList = document.querySelector(".messages");
 const messageContainer = document.querySelector(".main__right__chat");
 const participantsList = document.querySelector(".participants");
+const shareInviteBtn = document.getElementById("shareInviteBtn");
+const sharingLink = document.getElementById("share__invite");
+const promptBox = document.querySelector(".prompt");
 const muteBtn = document.getElementById("mute__btn");
 const videoBtn = document.getElementById("video__btn");
 const leaveBtn = document.getElementById("leaveBtn");
@@ -113,6 +117,7 @@ const toggleChatBox = () => {
   }
   if (mainContainer.classList.contains("chat__inactive")) {
     mainContainer.classList.remove("chat__inactive");
+    input.focus();
   } else {
     mainContainer.classList.add("chat__inactive");
   }
@@ -196,6 +201,24 @@ const toggleVideo = () => {
     myVideoStream.getVideoTracks()[0].enabled = true;
   }
 };
+//Function to show prompt box
+let timeout;
+function showPrompt() {
+  promptBox.style.transform = `translate(-50%, 0)`;
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    promptBox.style.transform = `translate(-50%, -300px)`;
+  }, 2000);
+}
+//Function to share invite
+function shareInvite() {
+  const url = window.location.href;
+  meetingId = url.split("/").slice(-1)[0];
+  sharingLink.value = meetingId;
+  sharingLink.select();
+  document.execCommand("copy");
+  showPrompt();
+}
 //Function to leave meeting
 function leaveMeeting() {
   window.location.href = "/";
@@ -208,3 +231,4 @@ leaveBtn.addEventListener("click", leaveMeeting);
 showParticipants.addEventListener("click", toggleParticipants);
 participantCloseBtn.addEventListener("click", closeParticipants);
 chatCloseBtn.addEventListener("click", closeChat);
+shareInviteBtn.addEventListener("click", shareInvite);
