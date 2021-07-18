@@ -3,6 +3,7 @@ const chatBtn = document.getElementById("chatBtn");
 const mainContainer = document.getElementById("main");
 const input = document.getElementById("input__box");
 const messageList = document.querySelector(".messages");
+const messageContainer = document.querySelector(".main__right__chat");
 const participantsList = document.querySelector(".participants");
 const muteBtn = document.getElementById("mute__btn");
 const videoBtn = document.getElementById("video__btn");
@@ -29,6 +30,7 @@ do {
 var peer = new Peer();
 //Video Part
 let myVideoStream;
+let screenShareStream;
 const myVideo = document.createElement("video");
 myVideo.muted = true;
 const peers = {};
@@ -135,6 +137,7 @@ const appendMessage = (msg, type) => {
   li.innerHTML = markup;
   messageList.append(li);
   input.value = "";
+  scrollToBottom();
 };
 //Function to send message
 const sendMessage = (e) => {
@@ -151,6 +154,10 @@ const sendMessage = (e) => {
 socket.on("receive_message", (msg) => {
   appendMessage(msg, "incoming");
 });
+//Function to scroll to bottom
+function scrollToBottom() {
+  messageContainer.scrollTop = messageContainer.scrollHeight;
+}
 //Function to toggle mute and unmute
 const toggleMuteUnmute = () => {
   if (muteIcon.classList.contains("fa-microphone")) {
