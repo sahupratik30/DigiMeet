@@ -4,7 +4,7 @@
   "description": "zoom-clone",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js -e ejs,js,css"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "Pratik Sahu",
