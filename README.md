@@ -11,8 +11,9 @@
       ```
       1. Real-time audio and video streaming.
       2. Real-time chat.
-      3. Supports multiple participants.
-      4. Easy to use.
+      3. Supports feature of multiple meeting-rooms.
+      4. Supports multiple participants.
+      5. Easy to use.
       ```
                                                          
 ## Technology Stack      
