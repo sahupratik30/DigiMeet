@@ -139,7 +139,7 @@ const sendMessage = (e) => {
     user: user_name,
     message: e.target.value.trim(),
   };
-  if (key === "Enter") {
+  if (key === "Enter" && msg.message !== "") {
     appendMessage(msg, "outgoing");
     socket.emit("send_message", msg);
   }
