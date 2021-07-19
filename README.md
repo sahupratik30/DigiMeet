@@ -24,6 +24,10 @@
       3. WebRTC --> PeerJS(for real-time peer to peer communication)
       4. Socket.io
       ```
+      
+   - ### Deployment
+        <img align="left" alt="heroku" width="35px" src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" /><br><br>
+      
 ## Link to view the app
 
 - Link - `https://digimeet.herokuapp.com/`
