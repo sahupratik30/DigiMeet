@@ -54,16 +54,8 @@ navigator.mediaDevices
         addVideoStream(video, userVideoStream);
       });
     });
-    socket.on("user-connected", (userid, userNames) => {
+    socket.on("user-connected", (userid) => {
       connectToNewUser(userid, stream);
-      participantsList.innerHTML = "";
-      userNames.forEach((username) => {
-        const li = document.createElement("li");
-        li.classList.add("participant");
-        const markup = `<i class="fas fa-user"></i>${username}`;
-        li.innerHTML = markup;
-        participantsList.append(li);
-      });
     });
     socket.on("update_users", (userNames) => {
       participantsList.innerHTML = "";
@@ -76,15 +68,7 @@ navigator.mediaDevices
       });
     });
   });
-socket.on("user-disconnected", (userid, userNames) => {
-  participantsList.innerHTML = "";
-  userNames.forEach((username) => {
-    const li = document.createElement("li");
-    li.classList.add("participant");
-    const markup = `<i class="fas fa-user"></i>${username}`;
-    li.innerHTML = markup;
-    participantsList.append(li);
-  });
+socket.on("user-disconnected", (userid) => {
   if (peers[userid]) peers[userid].close();
 });
 peer.on("open", (id) => {
