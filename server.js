@@ -35,7 +35,7 @@ io.on("connection", (socket) => {
   socket.on("join-room", (roomid, userid, name) => {
     socket.join(roomid);
     users.addUser(socket.id, name, roomid);
-    socket.to(roomid).emit("user-connected", userid);
+    socket.to(roomid).emit("user-connected", userid, users.getUser(socket.id));
     io.to(roomid).emit("update_users", users.getUserList(roomid));
     socket.on("send_message", (data) => {
       socket.to(roomid).emit("receive_message", data);
@@ -44,6 +44,7 @@ io.on("connection", (socket) => {
       let user = users.removeUser(socket.id);
       if (user) {
         io.to(user.room).emit("update_users", users.getUserList(user.room));
+        io.to(user.room).emit("user_left", user.name);
       }
       socket.to(roomid).emit("user-disconnected", userid);
     });
