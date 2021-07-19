@@ -21,7 +21,7 @@
   top: 2vh;
   transform: translate(-50%, -300px);
   padding: 10px 25px;
-  background-color: #f4b459;
+  background-color: rgba(185, 185, 185, 0.5);
   -webkit-transform: translate(-50%, -300px);
   -moz-transform: translate(-50%, -300px);
   -ms-transform: translate(-50%, -300px);
