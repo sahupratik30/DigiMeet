@@ -54,8 +54,9 @@ navigator.mediaDevices
         addVideoStream(video, userVideoStream);
       });
     });
-    socket.on("user-connected", (userid) => {
+    socket.on("user-connected", (userid, user) => {
       connectToNewUser(userid, stream);
+      showPrompt(`${user.name} has joined the meeting.`);
     });
     socket.on("update_users", (userNames) => {
       participantsList.innerHTML = "";
@@ -70,6 +71,9 @@ navigator.mediaDevices
   });
 socket.on("user-disconnected", (userid) => {
   if (peers[userid]) peers[userid].close();
+});
+socket.on("user_left", (name) => {
+  showPrompt(`${name} has left the meeting.`);
 });
 peer.on("open", (id) => {
   socket.emit("join-room", ROOM_ID, id, user_name);
@@ -141,6 +145,7 @@ const sendMessage = (e) => {
   }
 };
 socket.on("receive_message", (msg) => {
+  showPrompt("1 new message recieved.");
   appendMessage(msg, "incoming");
 });
 //Function to scroll to bottom
@@ -187,12 +192,13 @@ const toggleVideo = () => {
 };
 //Function to show prompt box
 let timeout;
-function showPrompt() {
+function showPrompt(message) {
   promptBox.style.transform = `translate(-50%, 0)`;
+  promptBox.innerText = message;
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     promptBox.style.transform = `translate(-50%, -300px)`;
-  }, 2000);
+  }, 3000);
 }
 //Function to share invite
 function shareInvite() {
@@ -201,7 +207,7 @@ function shareInvite() {
   sharingLink.value = meetingId;
   sharingLink.select();
   document.execCommand("copy");
-  showPrompt();
+  showPrompt("MeetingID copied successfully. You can share now.");
 }
 //Function to leave meeting
 function leaveMeeting() {
