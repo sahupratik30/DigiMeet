@@ -2,6 +2,11 @@
 
 ![Badge](https://img.shields.io/badge/video--meeting-application-blue)
 ![Badge](https://img.shields.io/badge/open--source-%E2%9D%A4-red)
+
+<br>
+                                                                          
+<p align="center">**If you like this repo, please star ⭐ this.**</p>                                        
+
    - ### Key Features
       ```
       1. Real-time audio and video streaming.
@@ -9,6 +14,7 @@
       3. Supports multiple participants.
       4. Easy to use.
       ```
+                                                         
 ## Technology Stack      
    - ### Front-End
       ```
