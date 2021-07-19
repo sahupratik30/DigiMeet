@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const { Users } = require("./utils/users");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const server = require("http").Server(app);
 const PORT = process.env.PORT || 3000;
 const io = require("socket.io")(server);
+let users = new Users();
 let rooms = [];
 //Set view engine
 app.set("views", path.join(__dirname, "/views"));
@@ -29,27 +31,21 @@ app.get("/room/:roomid", (req, res) => {
     res.redirect("/");
   }
 });
-const users = {};
 io.on("connection", (socket) => {
   socket.on("join-room", (roomid, userid, name) => {
     socket.join(roomid);
-    let userNames = [];
-    users[socket.id] = name;
-    for (const name in users) {
-      userNames.push(users[name]);
-    }
-    socket.to(roomid).emit("user-connected", userid, userNames);
-    io.in(socket.id).emit("update_users", userNames);
+    users.addUser(socket.id, name, roomid);
+    socket.to(roomid).emit("user-connected", userid);
+    io.to(roomid).emit("update_users", users.getUserList(roomid));
     socket.on("send_message", (data) => {
       socket.to(roomid).emit("receive_message", data);
     });
     socket.on("disconnect", () => {
-      delete users[socket.id];
-      let userNames = [];
-      for (const name in users) {
-        userNames.push(users[name]);
+      let user = users.removeUser(socket.id);
+      if (user) {
+        io.to(user.room).emit("update_users", users.getUserList(user.room));
       }
-      socket.to(roomid).emit("user-disconnected", userid, userNames);
+      socket.to(roomid).emit("user-disconnected", userid);
     });
   });
 });
