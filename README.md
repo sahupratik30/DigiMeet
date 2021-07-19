@@ -27,7 +27,14 @@
       
    - ### Deployment
         <img align="left" alt="heroku" width="35px" src="https://www.vectorlogo.zone/logos/heroku/heroku-icon.svg" /><br><br>
-      
+
+## Screenshots
+![ss1](https://user-images.githubusercontent.com/80754608/126188415-e5059b67-4471-4a9d-8049-422f5ec03ee3.png)
+![ss2](https://user-images.githubusercontent.com/80754608/126188420-31c22f83-18dd-4d33-b43d-06adc38d8b22.png)
+![ss3](https://user-images.githubusercontent.com/80754608/126188426-027b549b-06f9-46c8-98f0-17e03402f893.png)
+![ss4](https://user-images.githubusercontent.com/80754608/126188439-10ede72d-1118-4e5c-834b-c073fab658c8.png)
+![ss5](https://user-images.githubusercontent.com/80754608/126188409-306843be-7f33-4fd5-9dd9-a4b24245af8f.png)
+
 ## Link to view the app
 
 - Link - `https://digimeet.herokuapp.com/`
